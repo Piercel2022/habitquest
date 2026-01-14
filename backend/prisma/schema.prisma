@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PlayerProfile {
+  ACHIEVER
+  EXPLORER
+  SOCIALIZER
+  KILLER
+}
+
+enum HabitFrequency {
+  DAILY
+  WEEKLY
+  CUSTOM
+}
+
+enum QuestStatus {
+  ACTIVE
+  COMPLETED
+  EXPIRED
+}
+
+enum BossPhase {
+  PHASE_1
+  PHASE_2
+  PHASE_3
+  DEFEATED
+}
+
+model User {
+  id            String         @id @default(uuid())
+  email         String         @unique
+  passwordHash  String
+  username      String         @unique
+  playerProfile PlayerProfile?
+  
+  level         Int            @default(1)
+  xp            Int            @default(0)
+  coins         Int            @default(0)
+  
+  isPremium     Boolean        @default(false)
+  premiumUntil  DateTime?
+  
+  habits        Habit[]
+  completions   Completion[]
+  quests        Quest[]
+  bosses        Boss[]
+  badges        Badge[]
+  
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  
+  @@index([email])
+}
+
+model Habit {
+  id          String          @id @default(uuid())
+  userId      String
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name        String
+  description String?
+  frequency   HabitFrequency
+  weekDays    Int[]           // [0,1,2,3,4,5,6] pour dimanche-samedi
+  timesPerWeek Int?
+  
+  difficulty  Int             @default(1) // 1-3
+  xpReward    Int             @default(100)
+  
+  reminderTime DateTime?
+  
+  completions Completion[]
+  quests      Quest[]
+  bosses      Boss[]
+  
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  
+  @@index([userId])
+}
+
+model Completion {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  habitId   String
+  habit     Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  
+  completedAt DateTime @default(now())
+  xpEarned    Int
+  
+  @@unique([habitId, completedAt])
+  @@index([userId, completedAt])
+}
+
+model Quest {
+  id          String      @id @default(uuid())
+  userId      String
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  habitId     String?
+  habit       Habit?      @relation(fields: [habitId], references: [id], onDelete: SetNull)
+  
+  title       String
+  description String
+  status      QuestStatus @default(ACTIVE)
+  
+  xpReward    Int
+  coinReward  Int
+  
+  expiresAt   DateTime
+  completedAt DateTime?
+  
+  createdAt   DateTime    @default(now())
+  
+  @@index([userId, status, expiresAt])
+}
+
+model Boss {
+  id          String     @id @default(uuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  habitId     String
+  habit       Habit      @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  
+  name        String
+  maxHealth   Int        @default(10000)
+  currentHealth Int
+  phase       BossPhase  @default(PHASE_1)
+  
+  weekStart   DateTime
+  weekEnd     DateTime
+  
+  isDefeated  Boolean    @default(false)
+  defeatedAt  DateTime?
+  
+  createdAt   DateTime   @default(now())
+  
+  @@index([userId, weekStart])
+}
+
+model Badge {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  badgeType   String   // 'first_week', 'perfect_7', etc.
+  name        String
+  description String
+  iconUrl     String?
+  
+  unlockedAt  DateTime @default(now())
+  
+  @@unique([userId, badgeType])
+  @@index([userId])
+}
