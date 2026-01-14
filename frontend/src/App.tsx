@@ -12,7 +12,7 @@ export default function Home() {
         </div>
 
         {/* Navigation */}
-        <nav className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
+        <nav className="relative z-10 flex items-center justify-between px-8 py-6 ">
           <div className="flex items-center gap-2">
             <Sword className="w-8 h-8 text-amber-400" />
             <span className="text-2xl font-bold text-white">HabitQuest</span>
@@ -28,7 +28,7 @@ export default function Home() {
         </nav>
 
         {/* Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-8 py-20 md:py-32">
+        <div className="relative z-10  px-8 py-20 md:py-32">
           <div className="text-center max-w-4xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full text-amber-400 text-sm font-medium mb-6">
               <Zap className="w-4 h-4" />
@@ -117,7 +117,7 @@ export default function Home() {
       </div>
 
       {/* How It Works */}
-      <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
+      <div className="relative z-10  mx-auto px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Start Your Quest in 3 Steps</h2>
           <p className="text-xl text-slate-400">It's easy to get started</p>
@@ -154,7 +154,7 @@ export default function Home() {
       </div>
 
       {/* Social Proof */}
-      <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
+      <div className="relative z-10  mx-auto px-8 py-20">
         <div className="bg-gradient-to-r from-amber-400/10 to-orange-500/10 border border-amber-400/20 rounded-2xl p-12">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-white mb-4">Join Thousands of Questers</h2>
