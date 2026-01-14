@@ -252,7 +252,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-white/10 pt-8 text-center text-slate-400 text-sm">
-            © 2024 HabitQuest. All rights reserved.
+            © 2026 HabitQuest. All rights reserved.
           </div>
         </div>
       </footer>
