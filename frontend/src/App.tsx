@@ -1,6 +1,11 @@
-import { Sword, Target, Trophy, Zap, ArrowRight, CheckCircle2, Star, TrendingUp } from 'lucide-react';
+import { Sword, Target, Trophy, Zap, ArrowRight, Star, TrendingUp } from 'lucide-react';
 
 export default function Home() {
+
+  const handleNavigation = (path: string) => {
+    window.location.href = path;
+  };
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-indigo-950 via-purple-900 to-slate-900">
       {/* Hero Section */}
@@ -8,11 +13,11 @@ export default function Home() {
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse"></div>
         </div>
 
         {/* Navigation */}
-        <nav className="relative z-10 flex items-center justify-between px-8 py-6 ">
+        <nav className="relative z-10 flex items-center justify-between px-8 py-6">
           <div className="flex items-center gap-2">
             <Sword className="w-8 h-8 text-amber-400" />
             <span className="text-2xl font-bold text-white">HabitQuest</span>
@@ -28,8 +33,8 @@ export default function Home() {
         </nav>
 
         {/* Hero Content */}
-        <div className="relative z-10  px-8 py-20 md:py-32">
-          <div className="text-center max-w-4xl mx-auto">
+        <div className="relative z-10 px-8 py-20 md:py-32">
+          <div className="text-center  mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-400/10 border border-amber-400/20 rounded-full text-amber-400 text-sm font-medium mb-6">
               <Zap className="w-4 h-4" />
               Level up your life, one habit at a time
@@ -76,7 +81,7 @@ export default function Home() {
       </div>
 
       {/* Features Section */}
-      <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
+      <div className="relative z-10  mx-auto px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Level Up Your Life</h2>
           <p className="text-xl text-slate-400">Powerful features designed to keep you motivated</p>
@@ -117,13 +122,13 @@ export default function Home() {
       </div>
 
       {/* How It Works */}
-      <div className="relative z-10  mx-auto px-8 py-20">
+      <div className="relative z-10 mx-auto px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white mb-4">Start Your Quest in 3 Steps</h2>
           <p className="text-xl text-slate-400">It's easy to get started</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {[
             {
               step: "01",
@@ -197,7 +202,7 @@ export default function Home() {
       </div>
 
       {/* CTA Section */}
-      <div className="relative z-10 max-w-7xl mx-auto px-8 py-20">
+      <div className="relative z-10  mx-auto px-8 py-20">
         <div className="text-center bg-gradient-to-r from-amber-400 to-orange-500 rounded-2xl p-12 md:p-16">
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             Ready to Start Your Quest?
